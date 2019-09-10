@@ -1,4 +1,4 @@
-const { User } = require("./index")
+const { User, Article } = require("./index")
 
 
 var create = () => {
@@ -23,6 +23,38 @@ var create = () => {
     } )
 }
 
+// create()
 
 
-create()
+
+var arAndUser = async () => {
+    const user = await User.findByPk(1)
+    const article = await Article.create({
+        title: "我是标题22",
+        content: "我是内容，测试22",
+        label: "css"
+    })
+    const adduser = await article.setUser( user )
+    console.log( adduser )
+    console.log( "-数据创建---创建成功---" )
+    console.log( article )
+}
+
+// arAndUser()
+
+
+var search = async () => {
+    // const user = await User.findByPk(1)
+    // const art = await user.getArticle()
+    const data = await Article.findAll({
+        include: [{
+            model: User,
+            where: { id: 1 }
+        }]
+    })
+    console.log( "-数据查询成功---" )
+    // console.log( data )
+    console.log( data[0].User )
+}
+
+search()
