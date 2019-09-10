@@ -5,6 +5,8 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const jwt = require( "koa-jwt" )
+
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -23,6 +25,15 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
+
+
+app.use( jwt({
+    secret: "tan",
+    key: "token",                       // ctx.state.token来拿取token的数据
+    passthrough: false,                 // 始终能next，即使token错误
+    unless: [/^\/public/],              // 过滤的路径
+}) )
+
 
 // logger
 app.use(async (ctx, next) => {
