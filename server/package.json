@@ -25,7 +25,10 @@
     "koa2-cors": "^2.0.6",
     "mysql2": "^1.7.0",
     "pug": "^2.0.0-rc.1",
-    "sequelize": "^5.18.2"
+    "qcloudsms_js": "^0.1.1",
+    "redis": "^2.8.0",
+    "sequelize": "^5.18.2",
+    "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.8.1"

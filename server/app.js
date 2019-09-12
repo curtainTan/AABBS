@@ -6,13 +6,16 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require( "koa-jwt" )
+var cors = require('koa2-cors')
 
 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const auth = require('./routes/auth')
 
 // error handler
 onerror(app)
+
+app.use( cors() )
 
 // middlewares
 app.use(bodyparser({
@@ -26,14 +29,31 @@ app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
 
+// Custom 401 handling if you don't want to expose koa-jwt errors to users
+app.use(function(ctx, next){
+    return next().catch((err) => {
+        if (401 == err.status) {
+            ctx.status = 401;
+            ctx.body = 'Protected resource, use Authorization header to get access\n';
+        } else {
+            throw err;
+        }
+    });
+});
 
 app.use( jwt({
     secret: "tan",
     key: "token",                       // ctx.state.token来拿取token的数据
-    passthrough: false,                 // 始终能next，即使token错误
-    unless: [/^\/public/],              // 过滤的路径
-}) )
-
+    passthrough: true,                 // 始终能next，即使token错误
+})
+// }).unless({
+//     path: [                           // 过滤的路径
+//         /^\/public/,
+//         /^\/auth\/login/,
+//         /^\/$/
+//     ]
+// }) 
+)
 
 // logger
 app.use(async (ctx, next) => {
@@ -45,7 +65,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(auth.routes(), auth.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

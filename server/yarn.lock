@@ -713,6 +713,11 @@ dottie@^2.0.0:
   resolved "https://registry.npm.taobao.org/dottie/download/dottie-2.0.1.tgz#697ad9d72004db7574d21f892466a3c285893659"
   integrity sha1-aXrZ1yAE23V00h+JJGajwoWJNlk=
 
+double-ended-queue@^2.1.0-0:
+  version "2.1.0-0"
+  resolved "https://registry.npm.taobao.org/double-ended-queue/download/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
+  integrity sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npm.taobao.org/duplexer3/download/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -2010,6 +2015,13 @@ only@~0.0.2:
   resolved "https://registry.npm.taobao.org/only/download/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
   integrity sha1-Kv3oTQPlC5qO3EROMGEKcCle37Q=
 
+opentype.js@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.npm.taobao.org/opentype.js/download/opentype.js-0.7.3.tgz#40fb8ce18bfd60e74448efdfe442834098397aab"
+  integrity sha1-QPuM4Yv9YOdESO/f5EKDQJg5eqs=
+  dependencies:
+    tiny-inflate "^1.0.2"
+
 optimist@~0.6:
   version "0.6.1"
   resolved "https://registry.npm.taobao.org/optimist/download/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
@@ -2254,6 +2266,11 @@ pug@^2.0.0-rc.1:
     pug-runtime "^2.0.5"
     pug-strip-comments "^1.0.4"
 
+qcloudsms_js@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npm.taobao.org/qcloudsms_js/download/qcloudsms_js-0.1.1.tgz#e042b683ba1312a20d7dd0322446f20fd3dc644a"
+  integrity sha1-4EK2g7oTEqINfdAyJEbyD9PcZEo=
+
 qs@~4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/qs/download/qs-4.0.0.tgz?cache=0&sync_timestamp=1566009952956&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqs%2Fdownload%2Fqs-4.0.0.tgz#c31d9b74ec27df75e543a86c78728ed8d4623607"
@@ -2309,6 +2326,25 @@ readdirp@^2.2.1:
     graceful-fs "^4.1.11"
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
+
+redis-commands@^1.2.0:
+  version "1.5.0"
+  resolved "https://registry.npm.taobao.org/redis-commands/download/redis-commands-1.5.0.tgz#80d2e20698fe688f227127ff9e5164a7dd17e785"
+  integrity sha1-gNLiBpj+aI8icSf/nlFkp90X54U=
+
+redis-parser@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.npm.taobao.org/redis-parser/download/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
+  integrity sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+
+redis@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.npm.taobao.org/redis/download/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
+  integrity sha1-ICKI4/WMSfYHnZevehDhMDrhSwI=
+  dependencies:
+    double-ended-queue "^2.1.0-0"
+    redis-commands "^1.2.0"
+    redis-parser "^2.6.0"
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"
@@ -2687,6 +2723,13 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
+svg-captcha@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/svg-captcha/download/svg-captcha-1.4.0.tgz#32ead3c6463936c218bb3bc9ed04fea4eeffe492"
+  integrity sha1-MurTxkY5NsIYuzvJ7QT+pO7/5JI=
+  dependencies:
+    opentype.js "^0.7.3"
+
 swig@~1.4.2:
   version "1.4.2"
   resolved "https://registry.npm.taobao.org/swig/download/swig-1.4.2.tgz#4085ca0453369104b5d483e2841b39b7ae1aaba5"
@@ -2733,6 +2776,11 @@ timed-out@^4.0.0:
   version "4.0.1"
   resolved "https://registry.npm.taobao.org/timed-out/download/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
   integrity sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
+
+tiny-inflate@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/tiny-inflate/download/tiny-inflate-1.0.2.tgz#93d9decffc8805bd57eae4310f0b745e9b6fb3a7"
+  integrity sha1-k9nez/yIBb1X6uQxDwt0Xptvs6c=
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
