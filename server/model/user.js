@@ -8,7 +8,7 @@ module.exports = ( sequelize, DataTypes ) => {
             allowNull: false,
         },
         psw: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(64),
             allowNull: false
         },
         phone: {
@@ -17,7 +17,7 @@ module.exports = ( sequelize, DataTypes ) => {
             unique: true,
             validate: {
                 isEven( value ){
-                    if( /^[1][3|4|5|7|8|9][0-9]{9}$/.test( value ) ){
+                    if( /^[1][345789][0-9]{9}$/.test( value ) ){
                         
                     } else {
                         throw new Error("电话号码不符合标准")

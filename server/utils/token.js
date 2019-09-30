@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken")
 
-const tokenTime = 1000 * 60 * 60 * 24
+const tokenTime = 60 * 60 * 24
 
 
 module.exports = {
     setToken( data ){
-        var token = jwt.sign( { userName: data.userId }, "tan", {
+        var token = jwt.sign( { phone: data }, "tan", {
             expiresIn: tokenTime
         } )
         return token

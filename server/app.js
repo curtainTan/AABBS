@@ -11,6 +11,8 @@ var cors = require('koa2-cors')
 
 const index = require('./routes/index')
 const auth = require('./routes/auth')
+const article = require('./routes/article')
+
 
 // error handler
 onerror(app)
@@ -44,15 +46,18 @@ app.use(function(ctx, next){
 app.use( jwt({
     secret: "tan",
     key: "token",                       // ctx.state.token来拿取token的数据
-    passthrough: true,                 // 始终能next，即使token错误
+    // passthrough: true,                 // 始终能next，即使token错误
+}).unless({
+    path: [                           // 过滤的路径
+        /^\/public/,
+        /^\/auth\/login/,
+        /^\/auth\/phoneCode/,
+        /^\/auth\/captcha/,
+        /^\/auth\/register/,
+        /^\/article\/allowAllUpload/,
+        /^\/$/
+    ]
 })
-// }).unless({
-//     path: [                           // 过滤的路径
-//         /^\/public/,
-//         /^\/auth\/login/,
-//         /^\/$/
-//     ]
-// }) 
 )
 
 // logger
@@ -66,6 +71,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(auth.routes(), auth.allowedMethods())
+app.use(article.routes(), article.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
