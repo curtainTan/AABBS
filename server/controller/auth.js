@@ -111,7 +111,7 @@ const setPhoneCode = async ctx => {
           msg: sendData.errmsg
         }
       } else {
-        redis.SETEX( data.phone, 60, smsCode )
+        redis.SETEX( data.phone, 60 * 60 , smsCode )
         ctx.body = {
           msg: "验证码发送"
         }
@@ -129,7 +129,9 @@ const rejester = async ctx => {
   const data = ctx.request.body
   var userExist = await userfun.getUserByPhone( data.phone )
   // 判断用户是否存在
-  if( userExist.dataValues.phone ){
+  console.log( "查询yonghu " )
+  console.log( userExist )
+  if( userExist && userExist.dataValues.phone ){
     ctx.body = {
       mas: "用户已经存在--"
     }
@@ -180,12 +182,12 @@ const captcha = async ctx => {
 // 换头像
 const uploadHeader = async ctx => {
   var user = await userfun.getUserByPhone( ctx.state.token.phone )
-  user.headImg = "http://localhost:3000/articleImg/" + ctx.request.files[0].filename
+  user.headImg = "http://localhost:3000/public/articleImg/" + ctx.request.files[0].filename
   var save = await user.save()
   console.log( "保存了" )
   console.log( save )
   ctx.body = {
-    headImg: "http://localhost:3000/articleImg/" + ctx.request.files[0].filename
+    headImg: "http://localhost:3000/public/articleImg/" + ctx.request.files[0].filename
   }
 }
 
