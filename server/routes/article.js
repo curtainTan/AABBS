@@ -24,8 +24,14 @@ var upload = multer( { storage: storage } )
 router.post( "/upArticleImg", upload.any(), article.uploadImage )
 router.post( "/allowAllUpload", upload.any(), article.uploadImage )
 router.post( "/addArticle", article.createArticle )
+router.post( "/updateArticle", article.updateArticle )
+
+
 // 没有token就可以请求的公共接口
 router.get( "/public/list", article.getArticleByPageAndLabel )
+router.get( "/public/getArticle/:articleId", article.getArticleById )
+
+
 
 
 

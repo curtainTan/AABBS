@@ -33,6 +33,10 @@ module.exports = ( sequelize, DataTypes ) => {
         },
         mdContent: {
           type: DataTypes.TEXT,
+        },
+        lookNum: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0
         }
     },{
         sequelize,
@@ -40,6 +44,7 @@ module.exports = ( sequelize, DataTypes ) => {
         paranoid: true,
         updatedAt: false,
         underscored: true,
+        deletedAt: "destroyTime",
         comment: "我是文章表"
     })
     

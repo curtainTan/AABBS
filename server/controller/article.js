@@ -13,7 +13,8 @@ const createArticle = async ctx => {
     if( addRes ){
       ctx.body = {
         success: true,
-        msg: "操作成功---"
+        msg: "操作成功---",
+        articleId: addRes.dataValues.id
       }
     } else {
       ctx.body = {
@@ -36,7 +37,7 @@ const uploadImage = async ctx => {
   }
 }
 
-// 通过页码获取文章       按时间排序
+// 通过页码获取文章(所有文章)       按时间排序
 const getArticlesByPage = async ctx => {
   var data = ctx.request.body
 
@@ -45,6 +46,7 @@ const getArticlesByPage = async ctx => {
 // 通过页码和标签获取文章
 const getArticleByPageAndLabel = async ctx => {
   const data = JSON.parse( JSON.stringify( ctx.query ) )
+  console.log( data )
   var ss = await articleFun.getArticleByPageAndLabel( data )
   ctx.body = {
     success: true,
@@ -58,11 +60,34 @@ const searchByTitle = async ctx => {
 }
 
 // 修改文章
-const modificationArticle = async ctx => {
-
+const updateArticle = async ctx => {
+  var data = ctx.request.body
+  var upRes = await articleFun.updataArt( data )
+  if( upRes ){
+    ctx.body = {
+      msg: "更新成功---"
+    }
+  } else {
+    ctx.body = {
+      msg: "更新失败---"
+    }
+  }
 }
 
-// 
+// 通过id获取一篇文章
+const getArticleById = async ctx => {
+  var data = ctx.params
+  var article = await articleFun.searchOne( data )
+  console.log( "获取一篇文章的参数" )
+  console.log( article )
+  ctx.body = {
+    article : article,
+    msg: "文章获取成功"
+  }
+}
+
+
+
 
 module.exports = {
   createArticle,
@@ -70,6 +95,7 @@ module.exports = {
   getArticlesByPage,
   getArticleByPageAndLabel,
   searchByTitle,
-  modificationArticle
+  updateArticle,
+  getArticleById
 }
 
