@@ -5,6 +5,15 @@ const {
   Discuss
 } = require( "./index" )
 
+
+// --------------------------------文章相关------------------------------
+// 文章的增删查改
+// 获取文章列表
+// 文章的查找
+
+
+
+
 // 创建一篇文章
 const createArticle = async data => {
   const article = await Article.create({
@@ -60,8 +69,8 @@ const getArticleByPageAndLabel = async data => {
         attributes: ['user_name', 'headImg', 'signature', 'id']
       }
     ],
-    offset: parseInt( data.page ),
-    limit: 10,
+    offset: parseInt( data.page ) * 5,
+    limit: 5,
     order: [
       ['created_at', 'DESC']
     ]
@@ -96,6 +105,12 @@ const addLookNum = async data => {
   // artc.lookNum
 }
 
+
+
+// ---------------------------评论相关-------------------------------
+// 评论的添加和获取
+// 获取用户的评论
+
 // 增加一条评论
 const addDiscuss = async data => {
   var discuss = await Discuss.create({
@@ -112,6 +127,28 @@ const addDiscuss = async data => {
   return "成功---"
 }
 
+// 获取一片文章的评论
+const getDiscuss = async data => {
+  var discussList = await Discuss.findAndCountAll({
+    where: {
+      "article_id": parseInt( data.articleId )
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['user_name', 'headImg', 'signature']
+      }
+    ]
+  })
+  console.log( "查询评论成功" )
+  console.log( discussList )
+  return discussList
+}
+
+
+
+// ----------------------------喜欢----------------------------------
+
 // 添加和删除喜欢
 const addLike = async data => {
   var alike = await Like.findOrCreate({
@@ -125,15 +162,19 @@ const addLike = async data => {
   //   alike.destroy()
   // }
 }
+// 获取用户喜欢的文章
 
 
 module.exports = {
   createArticle,
   getArticleByPageAndLabel,
   deleteArticle,
-  addDiscuss,
+  
   addLookNum,
   updataArt,
   addLike,
-  searchOne
+  searchOne,
+
+  addDiscuss,
+  getDiscuss
 }

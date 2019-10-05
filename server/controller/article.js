@@ -77,15 +77,30 @@ const updateArticle = async ctx => {
 // 通过id获取一篇文章
 const getArticleById = async ctx => {
   var data = ctx.params
+  // 一个参数： articleId
   var article = await articleFun.searchOne( data )
-  console.log( "获取一篇文章的参数" )
-  console.log( article )
+  var discuss = await articleFun.getDiscuss( data )
+  // console.log( "获取一篇文章的参数" )
+  // console.log( article )
   ctx.body = {
     article : article,
-    msg: "文章获取成功"
+    msg: "文章获取成功",
+    discuss: discuss
   }
 }
 
+
+// 添加评论
+const addDiscuss = async ctx => {
+  var data = ctx.request.body
+  // 参数
+  //    content， artId， phone
+  data.phone = ctx.state.token.phone
+  var res = await articleFun.addDiscuss( data )
+  ctx.body = {
+    msg: res
+  }
+}
 
 
 
@@ -96,6 +111,9 @@ module.exports = {
   getArticleByPageAndLabel,
   searchByTitle,
   updateArticle,
-  getArticleById
+  getArticleById,
+
+
+  addDiscuss
 }
 

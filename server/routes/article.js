@@ -25,6 +25,8 @@ router.post( "/upArticleImg", upload.any(), article.uploadImage )
 router.post( "/allowAllUpload", upload.any(), article.uploadImage )
 router.post( "/addArticle", article.createArticle )
 router.post( "/updateArticle", article.updateArticle )
+router.post( "/addDiscuss", article.addDiscuss )
+
 
 
 // 没有token就可以请求的公共接口

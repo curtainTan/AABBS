@@ -55,7 +55,7 @@ app.use( jwt({
         /^\/auth\/captcha/,
         /^\/auth\/register/,
         /^\/article\/allowAllUpload/,
-        /^\/article\/allow/,
+        /^\/article\/public/,
         /^\/$/
     ]
 })
