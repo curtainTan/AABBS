@@ -1,7 +1,6 @@
 const { 
   User,
   Article,
-  Like,
   Discuss
 } = require( "./index" )
 

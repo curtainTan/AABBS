@@ -8,7 +8,7 @@ router.prefix('/like')
 
 router.get( "/addLike/:articleId", like.addLike )
 router.get( "/public/getUserLike/:uid/:page", like.getUserLike )
-router.get( "/public/getArtLike/:aid", like.getArtLike )
+router.get( "/public/getArtLike/:articleId", like.getArtLike )
 
 
 

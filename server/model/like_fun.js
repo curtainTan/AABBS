@@ -40,11 +40,11 @@ const getAllLike = async data => {
     where: {
       "user_id": data.uid
     },
-    attributes: ['id']
+    attributes: ['article_id']
   })
   var likeSet = []
   for( var i = 0; i < likeList.length; i ++ ){
-    likeSet.push( likeList[i].dataValues.id )
+    likeSet.push( likeList[i].dataValues.article_id )
   }
   return likeSet
 }
