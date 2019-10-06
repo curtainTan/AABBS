@@ -32,7 +32,7 @@ router.post( "/addDiscuss", article.addDiscuss )
 // 没有token就可以请求的公共接口
 router.get( "/public/list", article.getArticleByPageAndLabel )
 router.get( "/public/getArticle/:articleId", article.getArticleById )
-
+router.get( "/public/getDiscuss/:articleId/:page", article.getDiscuss )
 
 
 

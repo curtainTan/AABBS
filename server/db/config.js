@@ -1,5 +1,5 @@
 var config = {
-    dbname: "testdate",
+    dbname: "seqdemo",
     uname: "root",
     upwd: "123456",
     host: "localhost",

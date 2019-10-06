@@ -1,6 +1,6 @@
 const articleFun = require( "../model/article_fun" )
 const userFun = require( "../model/user_fun" )
-
+const likeFun = require( "../model/like_fun" )
 
 
 // 发表一篇文章
@@ -80,12 +80,14 @@ const getArticleById = async ctx => {
   // 一个参数： articleId
   var article = await articleFun.searchOne( data )
   var discuss = await articleFun.getDiscuss( data )
+  var likeList = await likeFun.getLikeByArt( data )
   // console.log( "获取一篇文章的参数" )
   // console.log( article )
   ctx.body = {
     article : article,
     msg: "文章获取成功",
-    discuss: discuss
+    discuss: discuss,
+    likeList: likeList
   }
 }
 
@@ -94,7 +96,7 @@ const getArticleById = async ctx => {
 const addDiscuss = async ctx => {
   var data = ctx.request.body
   // 参数
-  //    content， artId， phone
+  //    content， articleId,  phone
   data.phone = ctx.state.token.phone
   var res = await articleFun.addDiscuss( data )
   ctx.body = {
@@ -102,7 +104,16 @@ const addDiscuss = async ctx => {
   }
 }
 
-
+// 获取评论
+const getDiscuss = async ctx => {
+  var data = ctx.params
+  // 参数
+  // 页码-page   文章id--articleId
+  var discussList = await articleFun.getDiscuss( data )
+  ctx.body = {
+    discussList: discussList
+  }
+}
 
 module.exports = {
   createArticle,
@@ -114,6 +125,7 @@ module.exports = {
   getArticleById,
 
 
-  addDiscuss
+  addDiscuss,
+  getDiscuss
 }
 

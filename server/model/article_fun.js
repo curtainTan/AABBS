@@ -16,10 +16,12 @@ const {
 
 // 创建一篇文章
 const createArticle = async data => {
+  console.log( "创建一篇文章获取的数据" )
+  console.log( data )
   const article = await Article.create({
     title: data.title,
     caogao: data.caogao,
-    titleImage: data.titleImage,
+    titleImage: data.headerPic,
     content: data.content,
     brief: data.brief,
     label: data.label,
@@ -36,7 +38,7 @@ const updataArt = async data => {
   var res = await aArticle.update({
     title: data.title,
     caogao: data.caogao,
-    titleImage: data.titleImage,
+    titleImage: data.headerPic,
     content: data.content,
     brief: data.brief,
     label: data.label,
@@ -83,6 +85,7 @@ const getArticleByPageAndLabel = async data => {
 }
 
 // 查找，返回一篇文章的内容
+// 阅览量 +
 const searchOne = async data => {
   var article = await Article.findOne({
     where: {
@@ -95,16 +98,11 @@ const searchOne = async data => {
       }
     ]
   })
-  return article.dataValues
+  var res = await article.update({
+    lookNum: article.dataValues.lookNum + 1
+  })
+  return res.dataValues
 }
-
-// 增加阅览量
-const addLookNum = async data => {
-  const artc = await Article.findByPk( parseInt( data.id ) )
-  console.log( "查询一篇文章的结果" )
-  // artc.lookNum
-}
-
 
 
 // ---------------------------评论相关-------------------------------
@@ -116,7 +114,7 @@ const addDiscuss = async data => {
   var discuss = await Discuss.create({
     content: data.content
   })
-  var article = await Article.findByPk( data.artId )
+  var article = await Article.findByPk( data.articleId )
   var user = await User.findOne({
     where: {
       phone: data.phone
@@ -129,6 +127,8 @@ const addDiscuss = async data => {
 
 // 获取一片文章的评论
 const getDiscuss = async data => {
+  console.log( "获取平路-----传进来的参数" )
+  console.log( data )
   var discussList = await Discuss.findAndCountAll({
     where: {
       "article_id": parseInt( data.articleId )
@@ -138,31 +138,15 @@ const getDiscuss = async data => {
         model: User,
         attributes: ['user_name', 'headImg', 'signature']
       }
+    ],
+    offset: parseInt( data.page || 0 ) * 7,
+    limit: 7,
+    order: [
+      ['created_at', 'DESC']
     ]
   })
-  console.log( "查询评论成功" )
-  console.log( discussList )
   return discussList
 }
-
-
-
-// ----------------------------喜欢----------------------------------
-
-// 添加和删除喜欢
-const addLike = async data => {
-  var alike = await Like.findOrCreate({
-    where: {
-      phoneAndArticle: data.phone + data.articleId
-    }
-  })
-  console.log( "查询到的数据是" )
-  console.log( alike )
-  // if( alike ){
-  //   alike.destroy()
-  // }
-}
-// 获取用户喜欢的文章
 
 
 module.exports = {
@@ -170,11 +154,10 @@ module.exports = {
   getArticleByPageAndLabel,
   deleteArticle,
   
-  addLookNum,
   updataArt,
-  addLike,
   searchOne,
 
   addDiscuss,
-  getDiscuss
+  getDiscuss,
+
 }

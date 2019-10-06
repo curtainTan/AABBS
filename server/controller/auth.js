@@ -1,9 +1,11 @@
 const redis = require("../utils/redis")
 const sms = require( "../utils/sms" )
 const svgCaptcha = require("svg-captcha")
+
+
 const userfun = require("../model/user_fun")
 const tokenFun = require("../utils/token")
-
+const likeFun = require( "../model/like_fun" )
 
 
 // 密码登录
@@ -13,6 +15,7 @@ const login = async ctx => {
   if( user ){
     if( user.dataValues.psw === data.psw ){
       var nowToken = tokenFun.setToken( user.dataValues.phone )
+      var likeList = await likeFun.getAllLike( { uid: user.dataValues.id } )
       ctx.body = {
         status: 999,
         token: nowToken,
@@ -24,7 +27,9 @@ const login = async ctx => {
         bg: user.dataValues.bg,
         introduce: user.dataValues.introduce,
         work: user.dataValues.work,
-        joinTime: user.dataValues.createdAt
+        joinTime: user.dataValues.createdAt,
+        uid: user.dataValues.id,
+        likeList: likeList
       }
     } else {
       ctx.body = {
@@ -47,6 +52,7 @@ const loginByCode = async ctx => {
   if( phoneCode === data.phonecode ){
     var user = await userfun.getUserByPhone( data.phone )
     var nowToken = tokenFun.setToken( data.phone )
+    var likeList = await likeFun.getAllLike( { uid: user.dataValues.id } )
     ctx.body = {
       status: 999,
       token: nowToken,
@@ -58,7 +64,9 @@ const loginByCode = async ctx => {
       bg: user.dataValues.bg,
       introduce: user.dataValues.introduce,
       work: user.dataValues.work,
-      joinTime: user.dataValues.createdAt
+      joinTime: user.dataValues.createdAt,
+      uid: user.dataValues.id,
+      likeList: likeList
     }
   } else {
     ctx.body = {
@@ -77,6 +85,7 @@ const autoLogin = async ctx => {
       nowToken = tokenFun.setToken( ctx.state.token.phone )
     }
     var user = await userfun.getUserByPhone( ctx.state.token.phone )
+    var likeList = await likeFun.getAllLike( { uid: user.dataValues.id } )
     ctx.body = {
       status: 999,
       token: nowToken ? nowToken : "",
@@ -88,7 +97,9 @@ const autoLogin = async ctx => {
       bg: user.dataValues.bg,
       introduce: user.dataValues.introduce,
       work: user.dataValues.work,
-      joinTime: user.dataValues.createdAt
+      joinTime: user.dataValues.createdAt,
+      uid: user.dataValues.id,
+      likeList: likeList
     }
   }
 }
