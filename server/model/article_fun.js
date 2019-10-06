@@ -49,7 +49,7 @@ const updataArt = async data => {
 // 删除一篇文章
 const deleteArticle = async data => {
   const article = await Article.findByPk( parseInt( data.artId ) )
-  var res = article.destroy()
+  var res = await article.destroy()
   console.log( "删除一篇文章的结果" )
   console.log( res )
 }

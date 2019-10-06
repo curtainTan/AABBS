@@ -23,7 +23,7 @@ var create = () => {
     } )
 }
 
-create()
+// create()
 
 
 
@@ -64,6 +64,15 @@ var addDiscuss = async () => {
 }
 
 
+// 测试软删除一篇文章
+
+var testDelete = async () => {
+  console.log( "开始了---" )
+  var art = await Article.findByPk( 1 )
+  var res = await art.destroy()
+  console.log( "删除成功----" )
+  console.log( res )
+}
 
 
-
+testDelete()
