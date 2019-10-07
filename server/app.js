@@ -13,6 +13,7 @@ const index = require('./routes/index')
 const auth = require('./routes/auth')
 const article = require('./routes/article')
 const like = require('./routes/like')
+const collection = require('./routes/collection')
 
 
 // error handler
@@ -75,6 +76,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(auth.routes(), auth.allowedMethods())
 app.use(article.routes(), article.allowedMethods())
 app.use(like.routes(), like.allowedMethods())
+app.use(collection.routes(), collection.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

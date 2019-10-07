@@ -74,5 +74,25 @@ var testDelete = async () => {
   console.log( res )
 }
 
+// testDelete()
 
-testDelete()
+
+// 修改一篇文章的阅览量测试(失败)
+var testUpdate = async () => {
+  console.log( "开始了---" )
+  var res = await Article.update({
+    lookNum: lookNum + 1
+  }, {
+    where: {
+      "id": 9
+    }
+  })
+  console.log( "执行完成---" )
+  console.log( res )
+}
+
+
+testUpdate()
+
+
+

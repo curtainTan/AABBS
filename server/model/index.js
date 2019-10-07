@@ -3,17 +3,24 @@ const User = db.import("./user.js")
 const Article = db.import("./article.js")
 const Like = db.import("./like.js")
 const Discuss = db.import("./discuss.js")
+const Collection = db.import("./collection.js")
+const Collect = db.import("./collect.js")
 
 
 Article.belongsTo( User )
+
 Like.belongsTo( User )
 Like.belongsTo( Article )
 Discuss.belongsTo( Article )
 Discuss.belongsTo( User )
 
+Collection.belongsTo( User )
+Collect.belongsTo( Article )
+Collect.belongsTo( Collection )
 
 
-//  运行前执行一次此文件即可，同步表结构
+
+//  运行前执行一次此代码即可，同步表结构
 // var option = {
 //     force: false,     // 强制建表，会删除表的所有数据，重新建表
 //     alter: true,      // 修改表结构以适应模型，会删除模型中没有的字段
@@ -33,5 +40,7 @@ module.exports = {
     User,
     Article,
     Like,
-    Discuss
+    Discuss,
+    Collection,
+    Collect
 }
