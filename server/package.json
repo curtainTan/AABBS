@@ -33,6 +33,7 @@
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.8.1"
+    "nodemon": "^1.8.1",
+    "uglify-js": "^3.6.0"
   }
 }
