@@ -56,8 +56,11 @@ app.use( jwt({
         /^\/auth\/phoneCode/,
         /^\/auth\/captcha/,
         /^\/auth\/register/,
+        /^\/auth\/userInfo/,
         /^\/article\/allowAllUpload/,
         /^\/article\/public/,
+        /^\/like\/public/,
+        /^\/collection\/public/,
         /^\/$/
     ]
 })

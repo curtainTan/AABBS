@@ -71,8 +71,8 @@ const getLikeByUser = async data => {
         ]
       }
     ],
-    offset: parseInt( data.page || 0 ) * 10,
-    limit: 10,
+    offset: parseInt( data.page || 0 ) * 5,
+    limit: 5,
     order: [
       ['created_at', 'DESC']
     ]

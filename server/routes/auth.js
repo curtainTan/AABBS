@@ -23,9 +23,12 @@ router.post( "/phoneCode", auth.setPhoneCode )
 router.get( "/captcha", auth.captcha )
 router.post( "/register", auth.rejester )
 router.get( "/autoLogin", auth.autoLogin )
-router.get( "/loginByCode", auth.loginByCode )
+router.post( "/loginByCode", auth.loginByCode )
 router.post( "/uploadHeadImg", upload.any(), auth.uploadHeader )
 router.post( "/modificationData", auth.modificationData )
+
+
+router.get( "/userInfo/:uid", auth.getUserInfo )
 
 
 

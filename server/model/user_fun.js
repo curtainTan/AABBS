@@ -16,7 +16,9 @@ var userFun = {
       }
     })
   },
-  
+  getUserInfo( data ){
+    return User.findByPk( parseInt( data.uid ))
+  }
 }
 
 

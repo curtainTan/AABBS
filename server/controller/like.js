@@ -16,7 +16,14 @@ const addLike = async ctx => {
 
 
 const getUserLike = async ctx => {
-  
+  var data = ctx.params
+  console.log( "获取喜欢的数据" )
+  console.log( data )
+  var list = await likeFun.getLikeByUser( data )
+  console.log( list )
+  ctx.body = {
+    likeList: list
+  }
 }
 
 

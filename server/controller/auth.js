@@ -47,7 +47,9 @@ const login = async ctx => {
 
 // 通过验证码登录
 const loginByCode = async ctx => {
+  console.log( "验证码登陆了----" )
   const data = ctx.request.body
+  console.log( data )
   var phoneCode = await getRedisPhoneCode( data.phone )
   if( phoneCode === data.phonecode ){
     var user = await userfun.getUserByPhone( data.phone )
@@ -226,6 +228,25 @@ function getRedisPhoneCode( phone ){
   })
 }
 
+// 通过用户id，获取用户基本信息
+const getUserInfo = async ctx => {
+  var data = ctx.params
+  var user = await autoLogin.getUserInfo( data )
+  ctx.body = {
+    status: 999,
+    username: user.dataValues.user_name,
+    phone: user.dataValues.phone,
+    admin: user.dataValues.admin,
+    msg: user.dataValues.msg,
+    headImg: user.dataValues.headImg,
+    bg: user.dataValues.bg,
+    introduce: user.dataValues.introduce,
+    work: user.dataValues.work,
+    joinTime: user.dataValues.createdAt,
+    uid: user.dataValues.id,
+  }
+}
+
 
 module.exports = {
     login,
@@ -235,6 +256,7 @@ module.exports = {
     autoLogin,
     loginByCode,
     uploadHeader,
-    modificationData
+    modificationData,
+    getUserInfo
 }
 
